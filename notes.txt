@@ -1,0 +1,4 @@
+Sensor 1:
+	-2 States
+	-Broker: Remote or Local? Using Remote
+	-Do I need to include MAC address?
