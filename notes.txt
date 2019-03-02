@@ -1,4 +1,6 @@
 Sensor 1:
 	-2 States
 	-Broker: Remote or Local? Using Remote
-	-Do I need to include MAC address?
+	-Do I need to include MAC address? Needed for the MqttClient
+	-Even haven set the classpath file for the lib I still needed to set the classpath on the command line to be able to compile.
+	-To run the code through java command I had to go on a level upper from the code, at before app folder.

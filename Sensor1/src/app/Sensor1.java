@@ -5,7 +5,6 @@ import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import java.util.Random;
 import java.net.*;
 
 /*
@@ -42,6 +41,23 @@ public class Sensor1 {
         }
     }
 
+    public void startPublishing() throws MqttException{
+        try{
+            for(int i=0;i<10;i++)
+            publishOwnerPresence("away");
+            Thread.sleep(2000);
+            for(int i=0; i<10;i++)
+                publishOwnerPresence("home");
+            client.disconnect();
+        }catch(Exception e){e.printStackTrace();}
+    }
+
+    public void publishOwnerPresence(String situation) throws MqttException{
+        MqttMessage message = new MqttMessage(situation.getBytes());
+        client.publish(topic, message);
+        System.out.println("Publishing"+message);
+    }
+
     public byte[] getMacAddress(){
         byte[] mac=new byte[6];
         try{
@@ -54,6 +70,9 @@ public class Sensor1 {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello Java");
+        try{
+            System.out.println("MQTT Broker: " + BROKER_URL);
+            new Sensor1().startPublishing();
+        } catch(MqttException e) {System.out.println(e);}
     }
 }
