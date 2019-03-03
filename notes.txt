@@ -4,3 +4,8 @@ Sensor 1:
 	-Do I need to include MAC address? Needed for the MqttClient
 	-Even haven set the classpath file for the lib I still needed to set the classpath on the command line to be able to compile.
 	-To run the code through java command I had to go on a level upper from the code, at before app folder.
+	-I couldnt make it work properly on the class project style so I went back to the single file folder format as done in class.
+
+Sensor2:
+	-There are two messages published, one turn on/off the lights and other to send the status of the lights.
+	-Besides that, seems to be the same as Sensor1.
