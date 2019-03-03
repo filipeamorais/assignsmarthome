@@ -1,5 +1,3 @@
-package app;
-
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -8,11 +6,13 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.net.*;
 
 /*
- * Classname
+ * Classname Sensor 1
  * 
- * Version information
+ * Description Responsible for the informing the presence of the owner
+ * 
+ * Version information v1
  *
- * Date
+ * Date March 3rd, 2019
  */
 
 //sensor of presence
