@@ -15,3 +15,8 @@ Sensor2:
 
 Sensor3:
 	-There are two topics to publish, been the warning only related to extreme temperatures.
+
+Sensor4:
+	-Publishes motion detected on montion
+	-If not, publish off under lights
+	-If motion detected when the owner is away publushes intruder detection under warning.
