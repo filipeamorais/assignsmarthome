@@ -8,6 +8,10 @@ client.on('connect', function(){
         t = Math.floor(Math.random()*30 + 50)
         console.log(t)
         client.publish('temperature', ''+t)
+        if ((t<60)||(t>90)){
+            console.log('extreme temperatures')
+            client.publish('warning', 'extreme temperatures')
+        }
         if (count == 100){
             console.log('exiting')
             clearInterval(intervalObject)
