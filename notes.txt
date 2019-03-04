@@ -12,3 +12,6 @@ Sensor 1:
 Sensor2:
 	-There are two messages published, one turn on/off the lights and other to send the status of the lights.
 	-Besides that, seems to be the same as Sensor1.
+
+Sensor3:
+	-There are two topics to publish, been the warning only related to extreme temperatures.
