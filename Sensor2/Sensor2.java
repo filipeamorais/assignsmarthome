@@ -6,9 +6,9 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.net.*;
 
 /*
- * Classname Sensor 1
+ * Classname Sensor 2
  * 
- * Description Responsible for the informing the presence of the owner
+ * Description Responsible for turning the lights on/off and sending out the status
  * 
  * Version information v1
  *
@@ -16,24 +16,27 @@ import java.net.*;
  */
 
 //sensor of presence
-public class Sensor1 {
+public class Sensor2 {
 
     //atributes
     public static final String BROKER_URL = "tcp://iot.eclipse.org:1883";
     private MqttClient client;
-    String topic = "owner";
+    String topicLights = "lights";
+    String topicLightsStatus = "lights status";
 
     //constructor
     //setting up the client
-    public Sensor1(){
+    public Sensor2(){
         String clientId = getMacAddress() + "-pub";
         System.out.println("Client ID="+clientId);
         try{
             client = new MqttClient(BROKER_URL, clientId);
             MqttConnectOptions options = new MqttConnectOptions();
             options.setCleanSession(true);
-            final MqttTopic ownerTopic = client.getTopic(topic);
-            options.setWill(ownerTopic, "I'm gone".getBytes(), 2, true);
+            final MqttTopic lightsTopic = client.getTopic(topicLights);
+            final MqttTopic lightsStatusTopic = client.getTopic(topicLightsStatus);
+            options.setWill(lightsTopic, "I'm gone".getBytes(), 2, true);
+            options.setWill(lightsStatusTopic, "I'm gone".getBytes(), 2, true);
             client.connect();
         }catch (MqttException e){
             e.printStackTrace();
@@ -43,19 +46,29 @@ public class Sensor1 {
 
     public void startPublishing() throws MqttException{
         try{
-            for(int i=0;i<10;i++)
-            publishOwnerPresence("away");
+            for(int i=0;i<10;i++){
+                publishLights("on");
+                publishLightsStatus("on");
+            }
             Thread.sleep(2000);
-            for(int i=0; i<10;i++)
-                publishOwnerPresence("home");
+            for(int i=0; i<10;i++){
+                publishLights("off");
+                publishLightsStatus("off");
+            }
             client.disconnect();
         }catch(Exception e){e.printStackTrace();}
     }
 
-    public void publishOwnerPresence(String situation) throws MqttException{
+    public void publishLights(String situation) throws MqttException{
         MqttMessage message = new MqttMessage(situation.getBytes());
-        client.publish(topic, message);
+        client.publish(topicLights, message);
         System.out.println(message);
+    }
+
+    public void publishLightsStatus(String situation) throws MqttException{
+        MqttMessage message = new MqttMessage(situation.getBytes());
+        client.publish(topicLights, message);
+        System.out.println("Status: " + message);
     }
 
     public byte[] getMacAddress(){
@@ -72,7 +85,7 @@ public class Sensor1 {
     public static void main(String[] args) throws Exception {
         try{
             System.out.println("MQTT Broker: " + BROKER_URL);
-            new Sensor1().startPublishing();
+            new Sensor2().startPublishing();
         } catch(MqttException e) {System.out.println(e);}
     }
 }

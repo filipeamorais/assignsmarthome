@@ -1,3 +1,6 @@
+set classpath=.;org.eclipse.paho.client.mqttv3-1.2.0.jar
+
+
 Sensor 1:
 	-2 States
 	-Broker: Remote or Local? Using Remote
