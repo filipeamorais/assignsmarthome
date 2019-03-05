@@ -6,9 +6,27 @@ app = express()
 
 //expressserver
 app.get('/MyHome', (req, res)=>{
-    client.on('message', (topic, msg)=> {
-        res.write(msg);
+    //res.write('oi')
+    res.writeHead(200, {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive'
     });
+
+    res.write('\n')
+    var timer = setInterval(()=> {
+        res.write('#');
+    }, 1000);
+
+    // req.on("close", ()=> {
+    //     clearTimeout(timer);
+    //     client.end();
+    // });
+    // client.on('message', (topic, msg)=> {
+    //     res.write('oi2')
+    //     res.end('Coffee Maker not connected')
+    // });
+    //res.end('Coffee Maker not connected')
 })
 
 app.get('/Temperature', (req, res)=>{
