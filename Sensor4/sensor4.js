@@ -1,13 +1,13 @@
 var mqtt = require('mqtt')
 var client = mqtt.connect('tcp://iot.eclipse.org:1883')
+var lastMotionState = ''
+var lastOwnerState = 'away'
 
 client.on('connect', function(){
     client.subscribe('/owner')
     client.subscribe('/motion')
     var count1 = 0
     var count2 = 0
-    var lastMotionState = ''
-    var lastOwnerState = 'away'
 
     var intervalObject = setInterval ( ()=>{
         count1++
