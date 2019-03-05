@@ -6,28 +6,22 @@ var lastOwnerState = 'away'
 client.on('connect', function(){
     client.subscribe('/owner')
     client.subscribe('/motion')
-    var count1 = 0
-    var count2 = 0
+    var count = 0
 
     var intervalObject = setInterval ( ()=>{
-        count1++
-        client.publish('/motion', 'motion detected')
-        console.log('motion detected')
-        if (count1 == 20){
-            console.log('exiting')
-            clearInterval(intervalObject)
-        }
-    }, 1000)
-
-    var intervalObject = setInterval ( ()=>{
-        count2++
-        client.publish('/motion', 'motion detected')
-        console.log('motion detected')
-        if (count2 == 300){
-            console.log('turning the lights off')
-            client.publish('/lights', 'off')
-            console.log('exiting')
-            clearInterval(intervalObject)
+        count++
+        if (count<20){
+            client.publish('/motion', 'motion detected')
+            console.log('motion detected')
+        }else{
+            client.publish('/motion', '')
+            console.log('no motion detected')
+            if (count == 300){
+                console.log('turning the lights off')
+                client.publish('/lights', 'off')
+                console.log('exiting')
+                clearInterval(intervalObject)
+            }
         }
     }, 1000)
 })
