@@ -19,4 +19,4 @@ Sensor3:
 Sensor4:
 	-Publishes motion detected on montion
 	-If not, publish off under lights
-	-If motion detected when the owner is away publushes intruder detection under warning.
+	-If motion detected when the owner is away publushes intruder detection under warning. (have to be subscribed to the topic of the owner)

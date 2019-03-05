@@ -12,10 +12,10 @@ client.on('connect', function(){
         count++
         if (count<20){
             client.publish('/motion', 'motion detected')
-            console.log('motion detected')
+            //console.log('motion detected')
         }else{
             client.publish('/motion', '')
-            console.log('no motion detected')
+            //console.log('no motion detected')
             if (count == 300){
                 console.log('turning the lights off')
                 client.publish('/lights', 'off')
