@@ -20,3 +20,5 @@ Sensor4:
 	-Publishes motion detected on montion
 	-If not, publish off under lights
 	-If motion detected when the owner is away publushes intruder detection under warning. (have to be subscribed to the topic of the owner)
+
+04/03/2019-Until now: All of them are working but it seems when Sensor1 and Sensor2 are operational together at some point the connection crashes. I wonder if it could be for using a remote mqtt broker.

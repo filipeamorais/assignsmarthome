@@ -21,8 +21,8 @@ public class Sensor2 {
     //atributes
     public static final String BROKER_URL = "tcp://iot.eclipse.org:1883";
     private MqttClient client;
-    String topicLights = "lights";
-    String topicLightsStatus = "lights status";
+    String topicLights = "/lights";
+    String topicLightsStatus = "/lights status";
 
     //constructor
     //setting up the client
