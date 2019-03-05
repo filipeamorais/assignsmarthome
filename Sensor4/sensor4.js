@@ -13,17 +13,17 @@ client.on('connect', function(){
         count1++
         client.publish('/motion', 'motion detected')
         console.log('motion detected')
-        if (count == 20){
+        if (count1 == 20){
             console.log('exiting')
             clearInterval(intervalObject)
         }
     }, 1000)
 
     var intervalObject = setInterval ( ()=>{
-        count1++
+        count2++
         client.publish('/motion', 'motion detected')
         console.log('motion detected')
-        if (count == 300){
+        if (count2 == 300){
             console.log('turning the lights off')
             client.publish('/lights', 'off')
             console.log('exiting')
