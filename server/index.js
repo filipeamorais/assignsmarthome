@@ -41,12 +41,6 @@ app.get('/Temperature', (req, res)=>{
             res.write(msg);
         }
     });
-
-    // if (topic=='/temperature'){ 
-    //     client.on('message', (topic, msg)=> {
-    //         res.write(msg);
-    //     })
-    // }
 })
 
 app.listen(3000, function(){
@@ -61,5 +55,5 @@ client.on('connect', ()=>{
     client.subscribe('/ligths status')
     client.subscribe('/temperature')
     client.subscribe('/warning')
-    client.subscribe('/motion')
+    client.subscribe('/motionFiuab')
 })

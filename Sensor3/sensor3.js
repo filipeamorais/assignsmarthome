@@ -12,7 +12,7 @@ client.on('connect', function(){
             console.log('extreme temperatures')
             client.publish('/warning', 'extreme temperatures')
         }
-        if (count == 100){
+        if (count == 500){
             console.log('exiting')
             clearInterval(intervalObject)
         }

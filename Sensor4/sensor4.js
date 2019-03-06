@@ -1,21 +1,19 @@
 var mqtt = require('mqtt')
 var client = mqtt.connect('tcp://iot.eclipse.org:1883')
-var lastMotionState = ''
+var lastmotionFiuabState = ''
 var lastOwnerState = 'away'
 
 client.on('connect', function(){
     client.subscribe('/owner')
-    client.subscribe('/motion')
+    client.subscribe('/motionFiuab')
     var count = 0
 
     var intervalObject = setInterval ( ()=>{
         count++
-        if (count<20){
-            client.publish('/motion', 'motion detected')
-            //console.log('motion detected')
+        if (count<50){
+            client.publish('/motionFiuab', 'motion detected')
         }else{
-            client.publish('/motion', '')
-            //console.log('no motion detected')
+            client.publish('/motionFiuab', 'no motion detected')
             if (count == 300){
                 console.log('turning the lights off')
                 client.publish('/lights', 'off')
@@ -27,16 +25,16 @@ client.on('connect', function(){
 })
 
 client.on('message', function (topic, message){
-    if (topic=='/motion'){
-        lastMotionState = message.toString();
-        console.log('motion: ', lastMotionState)
+    if (topic=='/motionFiuab'){
+        lastmotionFiuabState = message.toString();
+        console.log('motion: ', lastmotionFiuabState)
     }
     if (topic=='/owner'){
         lastOwnerState = message.toString()
         console.log('motion: ', lastOwnerState)
     }
-    if ((lastMotionState=='motion detected')&&(lastOwnerState=='away')){
-        client.publish('warning', 'intruder detection')
+    if ((lastmotionFiuabState=='motion detected')&&(lastOwnerState=='away')){
+        client.publish('/warning', 'intruder detection')
         console.log('warning: intruder detection')
     }
 })

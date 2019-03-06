@@ -20,13 +20,14 @@ public class Sensor1 {
 
     //atributes
     public static final String BROKER_URL = "tcp://iot.eclipse.org:1883";
+    //public static final String BROKER_URL = "tcp://localhost:1883";
     private MqttClient client;
     String topic = "/owner";
 
     //constructor
     //setting up the client
     public Sensor1(){
-        String clientId = getMacAddress() + "-pub";
+        String clientId = getMacAddress() + "-pub1";
         System.out.println("Client ID="+clientId);
         try{
             client = new MqttClient(BROKER_URL, clientId);
@@ -43,10 +44,10 @@ public class Sensor1 {
 
     public void startPublishing() throws MqttException{
         try{
-            for(int i=0;i<10;i++)
+            for(int i=0;i<300;i++)
             publishOwnerPresence("away");
-            Thread.sleep(2000);
-            for(int i=0; i<10;i++)
+            Thread.sleep(500);
+            for(int i=0; i<1000;i++)
                 publishOwnerPresence("home");
             client.disconnect();
         }catch(Exception e){e.printStackTrace();}
